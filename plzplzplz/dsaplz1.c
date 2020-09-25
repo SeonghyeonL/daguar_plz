@@ -11,6 +11,7 @@ int main(void)
 
 	// 미리 선언할 변수들
 	int cntN, NoS; // for number of sequence
+	int cntL; // for counting LoS
 	
 	// 총 입력 받을 배열의 개수 얻기
 	printf("Number of Sequence (1~10) : ");
@@ -33,6 +34,11 @@ int main(void)
 	// LoS 배열 생성 (크기 = NoS)
 	int* LoS = (int*)malloc(sizeof(int) * NoS);
 
+	// input sequence의 2차원 배열 (maxNoS=10, maxLoS=20)
+	int insq[10][20]; // 정수형 배열, [행개수][열개수]
+
+
+
 	// NoS번째 배열의 길이 및 값 입력 받기
 	for (cntN = 0;cntN < NoS;cntN++)
 	{
@@ -52,28 +58,22 @@ int main(void)
 				break;
 			}
 		}
-	}
 
-	// 주의사항 출력 (숫자와 숫자는 띄어쓰기로 구별할 것)
-	printf("form: num1 num2 num3 ...\n");
+		printf("form: num1 num2 num3 ...\n"); // 입력 형태 제시
 
-	// 배열 내용 입력 받기
-	int insq[10][20]; // maxNoS=10, maxLoS=20
-	int cntL; // for counting LoS
-	for (cntN = 0;cntN < NoS;cntN++)
-	{
-		printf("Sequence(%d) : ", cntN+1);
+		printf("Sequence(%d) : ", cntN + 1);
 		for (cntL = 0;cntL < LoS;cntL++)
 		{
-			scanf_s("%d", &insq[cntN][cntL]);
+			scanf_s("%d", &insq[cntN][cntL]); // 입력 값 저장
 		}
-		printf("input seq(%d) : ", cntN+1);
+		printf("input seq(%d) : ", cntN + 1);
 		for (cntL = 0;cntL < LoS;cntL++)
 		{
-			printf("%d ", insq[cntN][cntL]);
+			printf("%d ", insq[cntN][cntL]); // 입력 값 출력
 		}
 		printf("\n");
 	}
+
 
 	// *** 여기부터 ***
 	int maxsum = MaxSubsequenceSum(insq, LoS);
