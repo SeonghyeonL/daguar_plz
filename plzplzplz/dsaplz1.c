@@ -62,31 +62,33 @@ int main(void)
 		printf("form: num1 num2 num3 ...\n"); // 입력 형태 제시
 
 		printf("Sequence(%d) : ", cntN + 1);
-		for (cntL = 0;cntL < LoS;cntL++)
+		for (cntL = 0;cntL < LoS[cntN];cntL++)
 		{
 			scanf_s("%d", &insq[cntN][cntL]); // 입력 값 저장
 		}
 		printf("input seq(%d) : ", cntN + 1);
-		for (cntL = 0;cntL < LoS;cntL++)
+		for (cntL = 0;cntL < LoS[cntN];cntL++)
 		{
 			printf("%d ", insq[cntN][cntL]); // 입력 값 출력
 		}
 		printf("\n");
+
+		int maxsum = MaxSubsequenceSum(insq[cntN], LoS[cntN]);
+		printf("MAXSUM: %d\n", maxsum);
+
+		int* subseq = MaxSubSeqSum(insq[cntN], LoS[cntN], maxsum);
+		printf("SUBSEQ: ");
+		int subseqlen = *subseq; // because subseq[0]=subseqlen
+		for (int i = 0;i < subseqlen;i++)
+		{
+			printf("%d ", subseq[i + 1]);
+		}
+		printf("\n");
+
+		free(subseq);
 	}
 
-
-	// *** 여기부터 ***
-	int maxsum = MaxSubsequenceSum(insq, LoS);
-	printf("MAXSUM: %d\n", maxsum);
-	int* subseq = MaxSubSeqSum(insq, LoS, maxsum);
-	printf("SUBSEQ: ");
-	int subseqlen = *subseq; // because subseq[0]=subseqlen
-	for (int i = 0;i < subseqlen;i++)
-	{
-		printf("%d ", subseq[i + 1]);
-	}
-	printf("\n");
-	free(insq); free(subseq);
+	free(insq);
 	return 0;
 }
 
